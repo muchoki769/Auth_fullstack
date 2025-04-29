@@ -67,10 +67,14 @@ export async function POST(request: NextRequest) {
             httpOnly: true,
         })
         return response;
-    } catch (error: any) {
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            console.error("Error in POST /api/users/resetPassword:", error);
+            return NextResponse.json({error: error.message}, {status: 500});
+        }
         return NextResponse.json
         ({
-            error: error.message
+            error: "Unexpected error occurred"
         },
          {status: 500});
     }

@@ -31,8 +31,13 @@ export async function POST(request: NextRequest) {
       success: true
     })
     
-  } catch(error:any) {
-    return NextResponse.json({error: error.message},
+  } catch(error:unknown) {
+    if (error instanceof Error) {
+      console.error("Error in POST /api/users/verifyemail:", error);
+      return NextResponse.json({error: error.message},
+          {status: 500})
+    }
+    return NextResponse.json({error: "Unexpected error occurred"},
         {status: 500})
   }
 }

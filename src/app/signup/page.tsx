@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {toast} from "react-hot-toast";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { AtSymbolIcon, EyeIcon, EyeSlashIcon, KeyIcon, UserIcon } from "@heroicons/react/24/outline";
 
 
@@ -27,9 +27,18 @@ const [showPassword, setShowPassword] = useState(false);
               toast.success("Signup success check your email to verify your account");
               router.push("/login");
 
-        }catch(error: any){
-            console.log("Signup failed", error.message);
-            toast.error(error.message);
+        }catch(error: unknown) {
+            const err = error as AxiosError<{message: string}>;
+            if (err.response?.data?.message) {
+                console.log(err.response.data.message);
+                toast.error(err.response.data.message);
+            } else if (err.message) {
+                console.log(err.message);
+                toast.error(err.message);
+            } else {
+                toast.error("Something went wrong");
+            }
+            
         } finally {
             setLoading(false);
         }

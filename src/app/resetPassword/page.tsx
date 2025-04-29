@@ -1,7 +1,7 @@
 "use client";
 
 import { EyeIcon, EyeSlashIcon, KeyIcon } from "@heroicons/react/24/outline";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import {useEffect, useState} from "react";
 import toast from "react-hot-toast";
@@ -26,15 +26,24 @@ export default function ResetPasswordPage() {
     const resetPassword = async () => {
         try{
             setLoading(true);
-            const response = await axios.post("/api/users/resetPassword", {
+            await axios.post("/api/users/resetPassword", {
                 token,
                 password,
             });
             toast.success("Password reset successfully");
             router.push("/login");
-        } catch (err: any) {
-            console.log(err.response.data);
-            toast.error(err.message);
+        } catch (err: unknown) {
+            const error = err as AxiosError<{message: string}>;
+            if (error.response?.data?.message) {
+                console.log(error.response.data.message);
+                toast.error(error.response.data.message);
+            } else if (error.message) {
+                console.log(error.message);
+                toast.error(error.message);
+            } else{
+                toast.error("Something went wrong");
+            }
+          
         } finally {
             setLoading(false);
         }
@@ -91,8 +100,10 @@ export default function ResetPasswordPage() {
                 onClick={resetPassword}
                 className= "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-200 ease-in-out"
                 // disabled={password.length < 6} // Disable button if password is less than 6 characters
+                disabled={loading}
                 >
                     Reset Password
+                    {loading && <span className="ml-2">Loading...</span>}
             </button>
         </div>
         </div>

@@ -1,5 +1,5 @@
 "use client";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import Link from "next/link"; 
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -14,9 +14,17 @@ export default function ProfilePage() {
             await axios.get("/api/users/logout")
             toast.success("Logout successfully")
             router.push("/login")
-        } catch(error: any) {
-            console.log(error.message);
-            toast.error(error.message);
+        } catch(err: unknown) {
+            const error = err as AxiosError<{message: string}>;
+            
+            if (error.response?.data?.message) {
+                toast.error(error.response.data.message);
+            } else if (error.message) {
+                toast.error(error.message);
+            } else{
+                toast.error("Something went wrong")
+            }
+            
         }
     }
 

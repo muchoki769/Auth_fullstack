@@ -1,5 +1,5 @@
 "use client";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import Link from "next/link";
 import React,{useEffect,useState} from "react";
 
@@ -8,17 +8,25 @@ export default function VerifyEmailPage() {
     const [verified, setVerified] = useState(false);
     const [error, setError] = useState(false);
 
-    const verifyUserEmail = async ( ) => {
+    const verifyUserEmail = async () => {
         try{
             await axios.post('/api/users/verifyemail',
                 {token})
             setVerified(true);
-        } catch (error:any) {
+        } catch (err: unknown) {
+            const error = err as AxiosError<{message: string}>;
+            if (error.response?.data?.message) {
+                console.log(error.response.data.message);
+            } else if (error.message) {
+                console.log(error.message);
+            } else {
+                console.log("Something went wrong");
+            }
             setError(true);
-            console.log(error.response.data);
+            
         }
     }
-
+    
     useEffect(() => {
         const urlToken = window.location.search.split("=") [1];
         setToken(urlToken || "");

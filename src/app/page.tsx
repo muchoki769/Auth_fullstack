@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 // import { Toaster } from 'react-hot-toast';
 
 // import { AppProps } from 'next/app';

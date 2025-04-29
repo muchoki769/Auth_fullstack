@@ -3,10 +3,8 @@
 import React, { useEffect, useState } from "react"
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import toast from "react-hot-toast";
-import { Eye, EyeOff } from "lucide-react";
-import Image from "next/image";
 import { AtSymbolIcon, EyeIcon, EyeSlashIcon, KeyIcon } from "@heroicons/react/24/outline";
 
 
@@ -23,7 +21,8 @@ export default function LoginPage() {
         const [buttonDisabled, setButtonDisabled] = React.useState(false);
         const [loading, setLoading] = React.useState(false);
         const [showPassword, setShowPassword] = useState(false);
-        // const [password, setPassword] = useState("");
+        const [, setError] = React.useState(false);
+     
     
         const onLogin = async ()=> {
             try{
@@ -32,9 +31,19 @@ export default function LoginPage() {
                 console.log("Login success", response.data);
                 toast.success("Login success");
                 router.push("/profile");
-            } catch(error: any ){
-                console.log("Login Failed", error.message);
-                toast.error(error.message);
+            } catch(err: unknown){
+                const error = err as AxiosError<{message: string}>;
+                setError(true);
+                if (error.response?.data?.message){
+                    console.log(error.response.data.message);
+                    toast.error(error.response.data.message);
+                } else if (error.message) {
+                    console.log(error.message);
+                    toast.error(error.message);
+                }
+                else {
+                    toast.error("Something went wrong");
+                }
 
             } finally {
                 setLoading(false);
@@ -50,9 +59,7 @@ export default function LoginPage() {
             }
         }, [user]);
 
-        // useEffect(() => {
-
-        // },[password]);
+     
         
     return (
 
@@ -98,19 +105,7 @@ export default function LoginPage() {
             placeholder='password'
             required
             type={showPassword ? "text" : "password"}
-            // endAdornment={
-            
-                // <button 
-                // type="button"
-                // onClick={() => setShowPassword((prev) => !prev)}
-                // className="absolute right-2 top-1/2 transform -translate-y-1/2"
-                // aria-label="toggle password visibility"
-                // >
-                //     {showPassword ? <EyeOff size={20}/> : <Eye size={20}/>}
-                // </button>
-            
-            // }
-
+         
             />
             <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px]
              w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900"

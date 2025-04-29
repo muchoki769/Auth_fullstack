@@ -1,17 +1,17 @@
 "use client";
 
 import { AtSymbolIcon } from "@heroicons/react/24/outline";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import Link from "next/link";
 import React,{useEffect,useState} from "react";
 import toast from "react-hot-toast";
 
-export default function forgotPasswordPage() {
+export default function ForgotPasswordPage() {
       const [email, setEmail] = useState("");
-        // const [verified, setVerified] = useState(false);
-        const [error, setError] = useState(false);
+      
+        const [, setError] = useState(false);
         const [buttonDisabled, setButtonDisabled] = useState(false);
-        const [loading, setLoading] = useState(false);
+        const [, setLoading] = useState(false);
         
 
         const forgotPassword = async ( ) => {
@@ -21,32 +21,26 @@ export default function forgotPasswordPage() {
                     {email})
                 // setVerified(true);
                 toast.success("Check your email to reset password");
-            } catch (error:any) {
+            } catch (err: unknown) {
+                const error = err as AxiosError<{message: string}>;
                 setError(true);
-                console.log(error.response.data);
-                toast.error(error.message);
+                if (error.response?.data?.message) {
+
+                
+                // console.log(error.response.data);
+                toast.error(error.response.data.message);
+                } else if (error.message){
+                    toast.error(error.message);
+                } else {
+                    toast.error("Something went wrong");
+
+                }
             }finally {
                 setLoading(false);
             }
         }
 
-        //   useEffect(() => {
-        //         const urlToken = window.location.search.split("=") [1];
-        //         setEmail(urlToken || "");
-        //     },[email])
 
-        //     useEffect(() => {
-        //           if(email.length > 0) {
-        //            forgotPassword();
-        //           } 
-        //        },[email]); 
-            //  useEffect(() => {
-            //             if(SetEmail.email.length > 0 ) {
-            //                 setButtonDisabled(false);
-            //             } else {
-            //                 setButtonDisabled(true);
-            //             }
-            //         }, [email]);
         useEffect(() =>  {
             setButtonDisabled(email.trim().length === 0);
         },[email]);
@@ -54,7 +48,7 @@ export default function forgotPasswordPage() {
         return(
             <div className = "flex flex-col items-center justify-center min-h-screen py-2 bg-gray-300">
                 <h1 className="text-2xl bg-blue-400 rounded-md py-2 px-4 m-2">Forgot Password Page</h1>
-                {/* {verified && ( */}
+                
                                 <div className= "flex flex-col grid-cols-1 gap-0.5 m-2  bg-gray-200 shadow-md py-4 px-4 border-2 border-gray-200 rounded-2xl w-full max-w-md ">
                                     <div>
                                          <label htmlFor="email">email</label>
@@ -86,15 +80,7 @@ export default function forgotPasswordPage() {
                                 </div>
 
                     
-                            {/* )}  */}
-                           {/* {error && (
-                                // <div>
-                                //     <h2 className="text-2xl  bg-red-500">Error !, Email Not Verified</h2>
-                                //     <Link href="/signup">
-                                //         signup
-                                //     </Link>
-                                // </div>
-                            )}  */}
+                        
             </div>
         )
 }
