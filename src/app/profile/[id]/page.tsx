@@ -1,12 +1,12 @@
 
 interface UserProfileProps {
-    params: {
+    params: Promise<{
         id: string;
 
-    };
+    }>;
 }
-export default function UserProfile({params}: UserProfileProps) {
-    const {id} = params;
+export default async function UserProfile(props: UserProfileProps) {
+    const {id} = await props.params;
     return (
         <div className="flex flex-col items-center justify-center min-h-screen py-2">
             <h1>User Profile</h1>
