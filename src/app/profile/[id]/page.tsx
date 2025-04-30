@@ -6,12 +6,13 @@ interface UserProfileProps {
     };
 }
 export default function UserProfile({params}: UserProfileProps) {
+    const {id} = params;
     return (
         <div className="flex flex-col items-center justify-center min-h-screen py-2">
             <h1>User Profile</h1>
             <hr />
             <p className="text-4xl">User Profile 
-                <span className="mt-3 p-2 ml-2 rounded bg-orange-500 text-black">{params.id}</span>
+                <span className="mt-3 p-2 ml-2 rounded bg-orange-500 text-black">{id}</span>
             </p>
         </div>
     )
