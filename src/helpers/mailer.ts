@@ -4,7 +4,7 @@ import bcryptjs from 'bcryptjs';
 
 
 type SendEmailParams ={
-//    email: string;
+
    emailType: "VERIFY" | "RESET";
    userId: string;
 };
