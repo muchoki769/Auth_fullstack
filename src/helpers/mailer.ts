@@ -4,12 +4,12 @@ import bcryptjs from 'bcryptjs';
 
 
 type SendEmailParams ={
-   email: string;
+//    email: string;
    emailType: "VERIFY" | "RESET";
    userId: string;
 };
 
-export const sendEmail = async ({email,emailType,userId}:SendEmailParams) => {
+export const sendEmail = async ({emailType,userId}:SendEmailParams) => {
    try{
         //create a hashed token
         const hashedToken = await bcryptjs.hash(userId.toString(), 10)
