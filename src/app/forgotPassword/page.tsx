@@ -49,7 +49,7 @@ export default function ForgotPasswordPage() {
             <div className = "flex flex-col items-center justify-center min-h-screen py-2 bg-gray-300">
                 <h1 className="text-2xl bg-blue-400 rounded-md py-2 px-4 m-2">Forgot Password Page</h1>
                 
-                                <div className= "flex flex-col grid-cols-1 gap-0.5 m-2  bg-gray-200 shadow-md py-4 px-4 border-2 border-gray-200 rounded-2xl w-full max-w-md ">
+                                <div className= "flex flex-col grid-cols-1 gap-0.5 m-2  bg-gray-200 shadow-md py-4 px-4 border-2 border-gray-200 rounded-2xl w-full max-w-sm mr-2 ml-2 ">
                                     <div>
                                          <label htmlFor="email">email</label>
                                          <div className="relative">

@@ -52,7 +52,7 @@ export default function ResetPasswordPage() {
     return (
         <div className = "flex items-center justify-center flex-col gap-0.5 min-h-screen p-4  bg-gray-300">
             <h1 className="font-bold text-2xl mb-4">Reset Your Password</h1>
-            <div  className="flex flex-col grid-cols-1 gap-0.5 w-full max-w-md  bg-gray-200 shadow-md border-2 border-gray-200 rounded-md px-2 py-4">
+            <div  className="flex flex-col grid-cols-1 gap-0.5 w-full max-w-sm mr-2 ml-2  bg-gray-200 shadow-md border-2 border-gray-200 rounded-2xl px-2 py-4">
                 <div>
             <label htmlFor="password">New Password</label>
             <div className="relative">

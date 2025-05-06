@@ -4,7 +4,7 @@ import bcryptjs from 'bcryptjs';
 
 
 type SendEmailParams ={
-
+   email: string;
    emailType: "VERIFY" | "RESET";
    userId: string;
 };
@@ -46,7 +46,7 @@ export const sendEmail = async ({emailType,userId}:SendEmailParams) => {
 
     const mailOptions = {
         from: '"Demo App"<no-reply@demomailtrap.co>', //'ndungudavidmuchoki@gmail.com'
-        to: "ndungudavidmuchoki@gmail.com", //email
+        to: "ndungudavidmuchoki@gmail.com",
         subject: emailType === "VERIFY" ? "Verify your email" : "Reset your password",
         html: 
         `<p>Click <a href="${process.env.DOMAIN}/${emailType === "VERIFY" ? "verifyemail" : "resetPassword"}?token=${hashedToken}">

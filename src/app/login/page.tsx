@@ -63,12 +63,12 @@ export default function LoginPage() {
         
     return (
 
-            <div className="flex  flex-col items-center justify-center min-h-screen py-2 bg-gray-300">
+            <div className="flex  flex-col items-center justify-center min-h-screen py-2 bg-gray-300 ">
             <h1>{loading ? "Processing..." : "Login"}</h1>
             <hr/>
             {/* <form className="flex flex-col grid-cols-1 gap-0.5 px-4 py-4 border-2 border-gray-600 rounded-2xl w-full max-w-md"> */}
-              <div className="flex  flex-col grid-cols-1 gap-0.5 m-2 py-4 px-4
-                 border-2 border-gray-200 rounded-2xl w-full max-w-md bg-gray-200 shadow-md">
+              <div className="w-full flex  flex-col grid-cols-1 gap-0.5 m-2 py-4 px-4
+                 border-2 border-gray-200 rounded-2xl  max-w-sm bg-gray-200 shadow-md ml-4 mr-4 ">
                
                 <div className="w-full">
                    

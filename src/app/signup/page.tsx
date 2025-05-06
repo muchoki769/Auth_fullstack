@@ -61,7 +61,7 @@ const [showPassword, setShowPassword] = useState(false);
             {/* <form className="flex flex-col grid-cols-1 gap-0.5 m-2 py-4 px-4 border-2 border-gray-600 rounded-2xl w-full max-w-md"> */}
            
             <div className="flex flex-col grid-cols-1 gap-0.5 m-2 py-4 px-4 border-2
-             border-gray-200 rounded-2xl w-full max-w-md  bg-gray-200 shadow-md">
+             border-gray-200 rounded-2xl w-full max-w-sm mr-2 ml-2  bg-gray-200 shadow-md">
                 <div className="w-full">
              <div>
             <label htmlFor="username">Username</label>

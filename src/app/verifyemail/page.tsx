@@ -41,7 +41,7 @@ export default function VerifyEmailPage() {
     return(
         <div className="flex items-center justify-center flex-col m-2  min-h-screen  py-2 bg-gray-200 ">
             <h1 className="text-4xl"> Verify Email</h1>
-            <div className=" flex flex-col grid-cols-2 gap-0.5 rounded-md border-2 border-gray-600 py-2 px-4">
+            <div className=" flex flex-col grid-cols-2 gap-0.5 rounded-2xl max-w-sm ml-2 mr-2 border-2 border-gray-600 py-2 px-4">
             {/* <h2 className="p-2 bg-blue-400 rounded-md py-2 px-4 m-2">{token ? `${token}` : "no token" }</h2> */}
 
             {verified && (
