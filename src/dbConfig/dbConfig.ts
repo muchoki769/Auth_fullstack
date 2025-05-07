@@ -4,11 +4,11 @@ import mongoose from 'mongoose';
 
 export  async function connect () {
     try{
-        mongoose.connect(process.env.MONGO_URI!);
+        mongoose.connect(process.env.MONGODB_URI!);
         const connection = mongoose.connection;
 
         if(mongoose.connection.readyState === 0){
-            await mongoose.connect(process.env.MONGO_URI!, {
+            await mongoose.connect(process.env.MONGODB_URI!, {
                 bufferCommands:false,
             });
         }
