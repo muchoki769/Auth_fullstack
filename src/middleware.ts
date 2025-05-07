@@ -27,10 +27,10 @@ export const config = {
     matcher:[
         '/',
         '/profile/:path*',
-        '/signup',
+        // '/signup',
         // '/login',
-        '/forgotPassword',
-        '/resetPassword',
-        '/verifyemail',
+        // '/forgotPassword',
+        // '/resetPassword',
+        // '/verifyemail',
     ]
 }
