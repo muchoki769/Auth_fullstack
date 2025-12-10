@@ -7,11 +7,11 @@ export  async function connect () {
         mongoose.connect(process.env.MONGODB_URI!);
         const connection = mongoose.connection;
 
-        if(mongoose.connection.readyState === 0){
-            await mongoose.connect(process.env.MONGODB_URI!, {
-                bufferCommands:false,
-            });
-        }
+        // if(mongoose.connection.readyState === 0){
+        //     await mongoose.connect(process.env.MONGO_URI!, {
+        //         bufferCommands:false,
+        //     });
+        // }
 
         connection.on('connected', () => {
             console.log('MongoDB connected succesfully');
